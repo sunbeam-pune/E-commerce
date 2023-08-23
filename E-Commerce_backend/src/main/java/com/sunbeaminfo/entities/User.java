@@ -1,33 +1,56 @@
 package com.sunbeaminfo.entities;
 
 import javax.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+
 @Entity
 @Table(name = "user")
-public class User extends BaseEntity {
+public class User implements UserDetails {
 
-    @Column(nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = true)
     private String first_name;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String last_name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int mob_no;
 
     @Column(nullable = true)
     private String gender;
+
+    public User(long id ,String email,Set<UserRoleEntity> role,String password){
+        this.id=id;
+        this.email = email;
+        this.password=password;
+        this.roles = role;
+    }
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cart cart;
@@ -83,13 +106,6 @@ public class User extends BaseEntity {
         paymentsList.remove(payment);
         payment.setUser(null);
     }
-
-
-
-
-
-
-
 
     public List<UserQueries> getUserQueriesList() {
         return userQueriesList;
@@ -262,5 +278,40 @@ public class User extends BaseEntity {
                 ", mob_no=" + mob_no +
                 ", gender='" + gender + '\'' +
                 '}';
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        return this.roles;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        // TODO Auto-generated method stub
+        return true;
     }
 }

@@ -2,8 +2,6 @@ package com.sunbeaminfo.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,11 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sunbeaminfo.DTO.OrderDTO;
-import com.sunbeaminfo.DTO.UserDTO;
 import com.sunbeaminfo.entities.Orders;
-import com.sunbeaminfo.entities.User;
 import com.sunbeaminfo.service.OrderService;
-import com.sunbeaminfo.service.UserService;
 
 @RestController
 @RequestMapping("/order")

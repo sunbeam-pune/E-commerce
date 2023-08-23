@@ -6,9 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.sunbeaminfo.dao.OrderRepository;
-import com.sunbeaminfo.dao.UserRepository;
 import com.sunbeaminfo.entities.Orders;
-import com.sunbeaminfo.entities.User;
 
 
 @Service

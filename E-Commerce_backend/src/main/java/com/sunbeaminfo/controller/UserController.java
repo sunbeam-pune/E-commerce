@@ -1,8 +1,6 @@
 package com.sunbeaminfo.controller;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,6 +52,10 @@ public ResponseEntity<List<UserDTO>> getCustomerList() {
         userDTO.setId(user.getId());
         userDTO.setFirst_name(user.getFirst_name());
         userDTO.setLast_name(user.getLast_name());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword());
+
+
         // Set other fields...
         userDTOs.add(userDTO);
     }

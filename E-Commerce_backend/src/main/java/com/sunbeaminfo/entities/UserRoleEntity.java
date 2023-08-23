@@ -1,18 +1,31 @@
 package com.sunbeaminfo.entities;
 
-import com.sunbeaminfo.enums.UserRole;
+// import com.sunbeaminfo.enums.UserRole;
 
 import javax.persistence.*;
 
+import org.springframework.security.core.GrantedAuthority;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public class UserRoleEntity {
+public class UserRoleEntity implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    // @Enumerated(EnumType.STRING)
+    private String authority;
+
+
+    public UserRoleEntity(long id, String authority){
+        this.id = id;
+        this.authority = authority;
+    }
 
     // Constructors, getters, setters
 
@@ -20,15 +33,26 @@ public class UserRoleEntity {
         return id;
     }
 
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    public UserRole getRole() {
-        return role;
+    public String getRole() {
+        return authority;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setRole(String authority) {
+        this.authority = authority;
+    }
+
+    @Override
+    public String getAuthority() {
+        // TODO Auto-generated method stub
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 }

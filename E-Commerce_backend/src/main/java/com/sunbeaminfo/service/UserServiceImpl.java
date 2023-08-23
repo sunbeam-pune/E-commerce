@@ -1,21 +1,38 @@
 package com.sunbeaminfo.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.sunbeaminfo.dao.UserRepository;
+
 import com.sunbeaminfo.entities.User;
+import com.sunbeaminfo.entities.UserRoleEntity;
+import com.sunbeaminfo.dao.UserRepository;
 
-//UserServiceImpl.java
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
- private final UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder encoder;
 
- public UserServiceImpl(UserRepository userRepository) {
-     this.userRepository = userRepository;
- }
+    @Autowired
+    private UserRepository userRepository;
 
- @Override
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        System.out.println("In the user details service");
+
+        return userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("user is not valid"));
+    }
+
+    @Override
  public User createUser(User user) {
      return userRepository.save(user);
  }

@@ -2,8 +2,6 @@ package com.sunbeaminfo.service;
 
 import java.util.List;
 import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sunbeaminfo.dao.ProductsRepository;
@@ -14,7 +12,6 @@ public class ProductsServiceImpl implements ProductsService {
 
     private final ProductsRepository productsRepository;
 
-    @Autowired
     public ProductsServiceImpl(ProductsRepository productsRepository) {
         this.productsRepository = productsRepository;
     }

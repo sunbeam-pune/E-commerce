@@ -1,6 +1,5 @@
 package com.sunbeaminfo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ public class ProductsController {
 
     private final ProductsService productsService;
 
-    @Autowired
+    
     public ProductsController(ProductsService productsService) {
         this.productsService = productsService;
     }

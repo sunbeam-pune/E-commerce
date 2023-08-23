@@ -1,7 +1,5 @@
 package com.sunbeaminfo.DTO;
 
-import javax.persistence.Column;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,12 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
-    private Long id;
-    private String first_name;
-    private String last_name;
+public class RegistrationDTO {
     private String email;
-    private String gender;
     private String password;
-
 }
