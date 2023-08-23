@@ -40,11 +40,13 @@ public class AuthenticationService {
     public User registerUser(String username, String password){
 
         String encodedPassword = passwordEncoder.encode(password);
-        UserRoleEntity userRole = roleRepository.findByAuthority("USER").get();
-
+        //UserRoleEntity userRole = roleRepository.findByAuthority("USER").get();
+        UserRoleEntity userRole1 = new UserRoleEntity();
+        userRole1.setAuthority("USER");
+        userRole1.setId(1);
         Set<UserRoleEntity> authorities = new HashSet<>();
 
-        authorities.add(userRole);
+        authorities.add(userRole1);
 
         return userRepository.save(new User(0, username, authorities, encodedPassword));
     }
