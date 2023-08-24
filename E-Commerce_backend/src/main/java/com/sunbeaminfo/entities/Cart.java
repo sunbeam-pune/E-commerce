@@ -9,6 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Cart extends BaseEntity {
     

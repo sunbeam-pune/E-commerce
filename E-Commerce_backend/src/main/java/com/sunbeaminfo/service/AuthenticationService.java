@@ -13,9 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sunbeaminfo.entities.User;
+import com.sunbeaminfo.DTO.CartDTO;
 import com.sunbeaminfo.DTO.LoginResponceDTO;
+import com.sunbeaminfo.DTO.RegistrationDTO;
 import com.sunbeaminfo.entities.UserRoleEntity;
-import com.sunbeaminfo.dao.RoleRepository;
+import com.sunbeaminfo.dao.CartRepository;
+// import com.sunbeaminfo.dao.RoleRepository;
 import com.sunbeaminfo.dao.UserRepository;
 
 @Service
@@ -26,7 +29,10 @@ public class AuthenticationService {
     private UserRepository userRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
+    private CartService cartService;
+
+    // @Autowired
+    // private RoleRepository roleRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -37,8 +43,13 @@ public class AuthenticationService {
     @Autowired
     private TokenService tokenService;
 
-    public User registerUser(String username, String password){
-
+    public User registerUser(RegistrationDTO user){
+        String email = user.getEmail();
+        String first_name= user.getFirst_name();
+        String last_name = user.getLast_name();
+        String gender=user.getGender();
+        int mob_no=user.getMob_no();
+        String password = user.getPassword();
         String encodedPassword = passwordEncoder.encode(password);
         //UserRoleEntity userRole = roleRepository.findByAuthority("USER").get();
         UserRoleEntity userRole1 = new UserRoleEntity();
@@ -48,7 +59,15 @@ public class AuthenticationService {
 
         authorities.add(userRole1);
 
-        return userRepository.save(new User(0, username, authorities, encodedPassword));
+       // return userRepository.save(new User(0, email, authorities, encodedPassword));
+        User savedUser = userRepository.save(new User(null, first_name, last_name, email, encodedPassword, mob_no, gender, null, null, authorities, null, null, null, null, null));
+        CartDTO cartDTO = new CartDTO();
+        cartDTO.setUserId(savedUser.getId());
+        cartService.createCart(cartDTO);
+
+        return savedUser;
+
+//
     }
 
     public LoginResponceDTO loginUser(String username, String password){
@@ -60,10 +79,10 @@ public class AuthenticationService {
 
             String token = tokenService.generateJwt(auth);
 
-            return new LoginResponceDTO(userRepository.findByEmail(username).get(), token);
+            return new LoginResponceDTO(userRepository.findByEmail(username).get(), token,"success");
 
         } catch(AuthenticationException e){
-            return new LoginResponceDTO(null, "");
+            return new LoginResponceDTO(null, "","fail");
         }
     }
 

@@ -1,11 +1,34 @@
 package com.sunbeaminfo.DTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sunbeaminfo.entities.Products;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class CartDTO {
 
     private Long id;
     private int quantity;
     private String color;
     private Long userId;
+    private List<Products> productsList = new ArrayList<>();
+
+    public List<Products> getProductsList() {
+        return productsList;
+    }
+
+    public void setProductsList(List<Products> productsList) {
+        this.productsList = productsList;
+    }
+
+
     public Long getId() {
         return id;
     }

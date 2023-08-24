@@ -19,6 +19,8 @@ public class Products extends BaseEntity {
 
     private String productImage;
 
+    private String company;
+
     @Enumerated(EnumType.STRING)
     private Category category;
 
@@ -70,11 +72,21 @@ public class Products extends BaseEntity {
         this.category = category;
     }
 
+    
+
     @Override
     public String toString() {
         return "products [productName=" + productName + ", price=" + price + ", unitStock=" + unitStock
                 + ", productDescription=" + productDescription + ", productImage=" + productImage + ", category="
                 + category + "]";
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     

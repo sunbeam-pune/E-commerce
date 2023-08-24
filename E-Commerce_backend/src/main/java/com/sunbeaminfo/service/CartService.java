@@ -2,6 +2,7 @@ package com.sunbeaminfo.service;
 
 import com.sunbeaminfo.DTO.CartDTO;
 import com.sunbeaminfo.DTO.ProductDTO;
+import com.sunbeaminfo.entities.Cart;
 import com.sunbeaminfo.entities.Products;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface CartService {
 
     CartDTO getCartById(Long id);
 
-    CartDTO createCart(CartDTO cartDTO);
+    Cart createCart(CartDTO cartDTO);
 
     CartDTO updateCart(Long id, CartDTO cartDTO);
 

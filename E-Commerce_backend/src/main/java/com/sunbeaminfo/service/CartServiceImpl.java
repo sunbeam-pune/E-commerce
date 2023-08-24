@@ -4,8 +4,10 @@ import com.sunbeaminfo.DTO.CartDTO;
 import com.sunbeaminfo.DTO.ProductDTO;
 import com.sunbeaminfo.entities.Cart;
 import com.sunbeaminfo.entities.Products;
+import com.sunbeaminfo.entities.User;
 import com.sunbeaminfo.dao.CartRepository;
 import com.sunbeaminfo.dao.ProductsRepository;
+import com.sunbeaminfo.dao.UserRepository;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -21,11 +23,13 @@ import javax.persistence.EntityNotFoundException;
 public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
+    private final UserRepository userRepository;
     private final ProductsRepository productRepository;
 
-    public CartServiceImpl(CartRepository cartRepository, ProductsRepository productRepository) {
+    public CartServiceImpl(CartRepository cartRepository, ProductsRepository productRepository,UserRepository userRepository) {
         this.cartRepository = cartRepository;
         this.productRepository = productRepository;
+        this.userRepository=userRepository;
     }
 
     @Override
@@ -41,10 +45,12 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDTO createCart(CartDTO cartDTO) {
+    public Cart createCart(CartDTO cartDTO) {
         Cart cart = convertToEntity(cartDTO);
+        User user = userRepository.findById(cartDTO.getUserId()).get();
+        cart.setUser(user);
         Cart savedCart = cartRepository.save(cart);
-        return convertToDTO(savedCart);
+        return savedCart;
     }
 
     @Override
@@ -66,8 +72,11 @@ public class CartServiceImpl implements CartService {
 
     private CartDTO convertToDTO(Cart cart) {
         CartDTO cartDTO = new CartDTO();
-        BeanUtils.copyProperties(cart, cartDTO);
-        cartDTO.setUserId(cart.getUser().getId()); // Assuming User has a 'getId' method
+        cartDTO.setId(cart.getId());
+        cartDTO.setUserId(cart.getUser().getId());
+        cartDTO.setProductsList(cart.getProductsList());
+        // BeanUtils.copyProperties(cart, cartDTO);
+        // cartDTO.setUserId(cart.getUser().getId()); 
         return cartDTO;
     }
 

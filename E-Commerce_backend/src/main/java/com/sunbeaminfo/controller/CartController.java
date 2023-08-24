@@ -2,6 +2,7 @@ package com.sunbeaminfo.controller;
 
 import com.sunbeaminfo.DTO.CartDTO;
 import com.sunbeaminfo.DTO.ProductDTO;
+import com.sunbeaminfo.entities.Cart;
 import com.sunbeaminfo.entities.Products;
 import com.sunbeaminfo.service.CartService;
 
@@ -42,8 +43,8 @@ public class CartController {
     }
 
     @PostMapping
-    public ResponseEntity<CartDTO> createCart(@RequestBody CartDTO cartDTO) {
-        CartDTO createdCart = cartService.createCart(cartDTO);
+    public ResponseEntity<Cart> createCart(@RequestBody CartDTO cartDTO) {
+        Cart createdCart = cartService.createCart(cartDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCart);
     }
 
