@@ -5,7 +5,7 @@ import { logout } from '../features/authSlice'
 import CategoryBar from './categorybar'
 
 function NavigationBar() {
-  const [username, setusername] = useState(sessionStorage.getItem('name'));
+  const [username, setusername] = useState(sessionStorage.getItem('first_name'));
   const navigate = useNavigate()
   const dispatch = useDispatch()
 

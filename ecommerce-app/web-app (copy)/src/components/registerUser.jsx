@@ -7,6 +7,7 @@ function RegisterUser() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
+  const [gender, setGender] = useState('')
   const [mobile, setMobile] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -36,11 +37,12 @@ function RegisterUser() {
         lastName,
         email,
         password,
+        gender,
         mobile
       )
 
       // parse the response
-      if (response['status'] === 'success') {
+      if (response['status'] == 'success') {
         toast.success('Successfully registered a new user')
 
         // go back to login
@@ -90,6 +92,13 @@ function RegisterUser() {
                   setEmail(e.target.value)
                 }}
               />
+            </div>
+
+            <div className='mb-3'>
+              <label htmlFor=''>Gender</label>&nbsp;&nbsp;<br/>
+              <input type="radio" value="Male" name="gender" onChange={(e) => {setGender(e.target.value)}}/> Male&nbsp;&nbsp;
+              <input type="radio" value="Female" name="gender" onChange={(e) => {setGender(e.target.value)}}/> Female&nbsp;&nbsp;
+              <input type="radio" value="Other" name="gender" onChange={(e) => {setGender(e.target.value)}}/> Other
             </div>
 
             <div className='mb-3'>

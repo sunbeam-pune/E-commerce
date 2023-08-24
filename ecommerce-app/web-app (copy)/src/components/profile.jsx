@@ -4,7 +4,8 @@ import { useState } from 'react';
 
 
 function Profile(){
-    const [username, setusername] = useState(sessionStorage.getItem('name'));
+    const [username, setusername] = useState(sessionStorage.getItem('first_name'));
+    const [email, setemail] = useState(sessionStorage.getItem('email'));
     const imageDimensions = { 
         width: '70px', // Adjust as needed
         height: '70px', // Adjust as needed
@@ -80,7 +81,7 @@ function Profile(){
     <div style={{position:"relative",minHeight:"100%" ,margin:"0"}}>
       <center><h1>My Profile</h1></center>
       <div style={{display:'flex'}}>
-      <img src={profileIcon} alt="Profile" style={imageDimensions}/>&nbsp;&nbsp;&nbsp;<h3 style={{paddingTop:'10px'}}>{username}<h6>mohit@sunbeam.com</h6></h3>
+      <img src={profileIcon} alt="Profile" style={imageDimensions}/>&nbsp;&nbsp;&nbsp;<h3 style={{paddingTop:'10px'}}>{username}<h6>{email}</h6></h3>
       
       </div>
 

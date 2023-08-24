@@ -2,18 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Footer(){
-
     return(
         <>
-        <div style={{height:"50px", width:"100%",   marginBottom:"100"}}>
- <div class="container" >
+        <div style={{height:"50px", width:"100%", marginBottom:"100"}}>
+ <div class="container">
   <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><Link to={"/About Us"} class="nav-link px-2 text-muted">Facebook</Link></li>
-      <li class="nav-item"><Link to={"/Facebook"} class="nav-link px-2 text-muted">Instagram</Link></li>
-      <li class="nav-item"><Link to={"/Instagram"} class="nav-link px-2 text-muted">About Us</Link></li>
-      <li class="nav-item"><Link to={"/Help"} class="nav-link px-2 text-muted">Help</Link></li>
-      <li class="nav-item"><Link to={"/Contact Us"} class="nav-link px-2 text-muted">Contact Us</Link></li>
+      <li class="nav-item"><Link to={"/aboutus"} class="nav-link px-2 text-muted">About Us</Link></li>
+      <li class="nav-item"><Link to={"/careers"} class="nav-link px-2 text-muted">Careers</Link></li>
+      <li class="nav-item"><Link to={"/faq"} class="nav-link px-2 text-muted">FAQ</Link></li>
+      <li class="nav-item"><Link to={"/help"} class="nav-link px-2 text-muted">Help</Link></li>
+      <li class="nav-item"><Link to={"/contactus"} class="nav-link px-2 text-muted">Contact Us</Link></li>
     </ul>
     <p class="text-center text-muted">&copy; 2023 E-Shopping, Inc</p>
   </footer>
@@ -24,8 +23,6 @@ function Footer(){
 }
 
 export default Footer
-
-
 
 // import React from 'react';
 // import '../../node_modules/bootstrap/dist/css/bootstrap.css';

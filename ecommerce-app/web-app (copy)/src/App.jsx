@@ -17,6 +17,16 @@ import 'react-toastify/dist/ReactToastify.css'
 import { login } from './features/authSlice'
 import Profile from './components/profile'
 import CategoryBar from './components/categorybar'
+import FAQ from './components/FAQ'
+import Aboutus from './components/aboutus'
+import Contactus from './components/contactus'
+import Help from './components/Help'
+import Careers from './components/Careers'
+import Appliances from './components/Appliances'
+import Electronics from './components/Electronics'
+import Fashion from './components/Fashion'
+import Mobiles from './components/Mobiles'
+import Grocery from './components/Grocery'
 
 function App() {
   // use selector accepts a function which passes the store global state
@@ -36,6 +46,7 @@ function App() {
     <div className='container-fluid'>
       {/* navigation bar here */}
       {/* conditional rendering */}
+      {/* <NavigationBar /> */}
       {loginStatus && <NavigationBar />}
       {/* {<ProductGallery/> && <CategoryBar />}   */}
       {/* {loginStatus && <Footer />} */}
@@ -64,7 +75,21 @@ function App() {
 
           <Route path='/profile' element={<Profile />} />
 
-          <Route path='/myorders' element={<MyOrders />} />
+          <Route path='/grocery' element={<Grocery />} />
+          <Route path='/mobiles' element={<Mobiles />} />
+          <Route path='/fashion' element={<Fashion />} />
+          <Route path='/electronics' element={<Electronics />} />
+          <Route path='/appliances' element={<Appliances />} />
+
+          <Route path='/aboutus' element={<Aboutus />} />
+
+          <Route path='/careers' element={<Careers />} />
+
+          <Route path='/faq' element={<FAQ />} />
+
+          <Route path='/help' element={<Help />} />
+
+          <Route path='/contactus' element={<Contactus />} />
 
         </Routes>
        

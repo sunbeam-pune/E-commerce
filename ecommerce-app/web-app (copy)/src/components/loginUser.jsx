@@ -23,22 +23,31 @@ function LoginUser() {
     } else {
       // call register api
       const response = await loginUserApi(email, password)
-
+      console.log("data1 : "+ response);
       // parse the response
-      if (response['status'] === 'success') {
+      // if (response['status'] === 'success') {
+        if (response['jwt'].length > 0) {
+          console.log("check")
         // parse the response's data and extract the token
-        const { token, name, mobile, profileImage } = response['data']
-
+        // const { token, name, mobile, profileImage } = response['data']
+        console.log("data : "+response);
+        const {first_name,email,jwt }= response
+        // const  jwt = response['data']
         // store the token for making other apis
-        sessionStorage['token'] = token
-        sessionStorage['name'] = name
-        sessionStorage['mobile'] = mobile
-        sessionStorage['profileImage'] = profileImage
+        // sessionStorage['token'] = token
+        // sessionStorage['name'] = name
+        // sessionStorage['mobile'] = mobile
+        // sessionStorage['profileImage'] = profileImage
+
+        sessionStorage['first_name'] = first_name
+        sessionStorage['email'] = email
+        // sessionStorage['user'] = user
+        sessionStorage['jwt'] = jwt
 
         // update global store's authSlice with status = true
         dispatch(login())
 
-        toast.success(`Welcome ${name} to store application`)
+        toast.success(`Welcome ${first_name} to store application`)
 
         // go back to login
         navigate('/product-gallery')

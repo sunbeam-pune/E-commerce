@@ -16,11 +16,13 @@ function ProductGallery() {
 
   const loadProducts = async () => {
     const response = await getProductList()
-    if (response['status'] === 'success') {
-      setProducts(response['data'])
-    } else {
-      toast.error('Error while calling get /product api')
-    }
+    // if (response['status'] == 'success') {
+    console.log(response)  
+    setProducts(response)
+
+    // } else {
+      // toast.error('Error while calling get /product api')
+    // }
   }
 
   // const getproductdetails = async (e) => {
@@ -84,13 +86,14 @@ function ProductGallery() {
                   <h5 className='card-title'>
                     
                     <Link to={`/item/${product.id}`}>
-                      {product['title']}
+                      {/* {product['title']} */}
+                      <div>{product['category']}</div>
+                      {product['productName']}
                     </Link>
                     </h5>
                   <div className='card-text'>
                     <div>{product['company']}</div>
-                    <div>₹ {product['price']}</div>
-                    
+                    <div>₹ {product['price']}</div>                   
                   </div>
                 </div>
               </div><br/>
