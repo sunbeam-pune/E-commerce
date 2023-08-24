@@ -1,10 +1,15 @@
 package com.sunbeaminfo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.sunbeaminfo.DTO.FileResponseDTO;
 import com.sunbeaminfo.entities.Products;
+import com.sunbeaminfo.service.FileService;
 import com.sunbeaminfo.service.ProductsService;
 
 import java.util.List;
@@ -16,6 +21,12 @@ import java.util.Optional;
 public class ProductsController {
 
     private final ProductsService productsService;
+
+    @Autowired
+    private FileService fileService;
+
+    @Value("${project.image}")
+    private String path;
 
     
     public ProductsController(ProductsService productsService) {
@@ -35,8 +46,22 @@ public class ProductsController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    // @PostMapping
+    // public ResponseEntity<Products> createProduct(@RequestBody Products product) {
+    //     Products createdProduct = productsService.createProduct(product);
+    //     return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
+    // }
+
     @PostMapping
-    public ResponseEntity<Products> createProduct(@RequestBody Products product) {
+    public ResponseEntity<Products> createProduct(@RequestPart("data") Products product,@RequestPart("image") MultipartFile image) {
+
+        String fileName =null;
+        try {
+            fileName = this.fileService.uploadImage(path,image);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        product.setProductImage(fileName);        
         Products createdProduct = productsService.createProduct(product);
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
