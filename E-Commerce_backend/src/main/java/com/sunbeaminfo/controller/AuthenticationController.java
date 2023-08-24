@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sunbeaminfo.DTO.LoginResponceDTO;
 import com.sunbeaminfo.DTO.RegistrationDTO;
-import com.sunbeaminfo.entities.User;
+import com.sunbeaminfo.DTO.RegistrationResponseDTO;
+// import com.sunbeaminfo.entities.User;
 import com.sunbeaminfo.service.AuthenticationService;
 
 @RestController
@@ -21,7 +22,7 @@ public class AuthenticationController {
     private AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public User registerUser(@RequestBody RegistrationDTO body){
+    public RegistrationResponseDTO registerUser(@RequestBody RegistrationDTO body){
         return authenticationService.registerUser(body);
     }
     

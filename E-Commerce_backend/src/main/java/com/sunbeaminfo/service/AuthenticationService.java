@@ -16,6 +16,7 @@ import com.sunbeaminfo.entities.User;
 import com.sunbeaminfo.DTO.CartDTO;
 import com.sunbeaminfo.DTO.LoginResponceDTO;
 import com.sunbeaminfo.DTO.RegistrationDTO;
+import com.sunbeaminfo.DTO.RegistrationResponseDTO;
 import com.sunbeaminfo.entities.UserRoleEntity;
 import com.sunbeaminfo.dao.CartRepository;
 // import com.sunbeaminfo.dao.RoleRepository;
@@ -43,12 +44,12 @@ public class AuthenticationService {
     @Autowired
     private TokenService tokenService;
 
-    public User registerUser(RegistrationDTO user){
+    public RegistrationResponseDTO registerUser(RegistrationDTO user){
         String email = user.getEmail();
         String first_name= user.getFirst_name();
         String last_name = user.getLast_name();
         String gender=user.getGender();
-        int mob_no=user.getMob_no();
+        long mob_no=user.getMob_no();
         String password = user.getPassword();
         String encodedPassword = passwordEncoder.encode(password);
         //UserRoleEntity userRole = roleRepository.findByAuthority("USER").get();
@@ -65,9 +66,7 @@ public class AuthenticationService {
         cartDTO.setUserId(savedUser.getId());
         cartService.createCart(cartDTO);
 
-        return savedUser;
-
-//
+        return new RegistrationResponseDTO(savedUser,"success");
     }
 
     public LoginResponceDTO loginUser(String username, String password){

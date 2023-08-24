@@ -2,6 +2,7 @@ package com.sunbeaminfo.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -18,6 +19,9 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -28,6 +32,8 @@ import com.nimbusds.jose.proc.SecurityContext;
 import com.sunbeaminfo.Utils.RSAKeyProperties;
 
 import static org.springframework.security.config.Customizer.withDefaults;
+
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 
 @Configuration
 public class SecurityConfiguration {
@@ -93,5 +99,24 @@ public class SecurityConfiguration {
         jwtConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
         return jwtConverter;
     }
+
+    @Bean
+public FilterRegistrationBean<CorsFilter> corsFilter() {
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    CorsConfiguration config = new CorsConfiguration();
+    config.addAllowedOrigin("*");
+    config.addAllowedHeader("*");
+    config.addAllowedMethod("OPTIONS");
+    config.addAllowedMethod("HEAD");
+    config.addAllowedMethod("GET");
+    config.addAllowedMethod("PUT");
+    config.addAllowedMethod("POST");
+    config.addAllowedMethod("DELETE");
+    config.addAllowedMethod("PATCH");
+    source.registerCorsConfiguration("/**", config);
+    FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
+    bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    return bean;
+}
     
 }

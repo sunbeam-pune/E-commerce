@@ -8,7 +8,7 @@ public class LoginResponceDTO {
     private String first_name;
     private String last_name;
     private String gender;
-    private int mob_no; 
+    private long mob_no; 
     private String jwt;
     private String status;
 
@@ -29,7 +29,7 @@ public class LoginResponceDTO {
 
    
 
-    public LoginResponceDTO(String email, String first_name, String last_name, String gender, int mob_no, String jwt,
+    public LoginResponceDTO(String email, String first_name, String last_name, String gender, long mob_no, String jwt,
             String status) {
         this.email = email;
         this.first_name = first_name;
@@ -74,11 +74,11 @@ public class LoginResponceDTO {
         this.gender = gender;
     }
 
-    public int getMob_no() {
+    public long getMob_no() {
         return mob_no;
     }
 
-    public void setMob_no(int mob_no) {
+    public void setMob_no(long mob_no) {
         this.mob_no = mob_no;
     }
 

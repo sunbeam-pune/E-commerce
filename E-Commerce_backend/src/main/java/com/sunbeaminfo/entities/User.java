@@ -40,7 +40,7 @@ public class User implements UserDetails {
     private String password;
 
     @Column(nullable = true)
-    private int mob_no;
+    private long mob_no;
 
     @Column(nullable = true)
     private String gender;
@@ -216,11 +216,11 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public int getMob_no() {
+    public long getMob_no() {
         return mob_no;
     }
 
-    public void setMob_no(int mob_no) {
+    public void setMob_no(long mob_no) {
         this.mob_no = mob_no;
     }
 

@@ -14,7 +14,7 @@ public class RegistrationDTO {
     private String first_name;
     private String last_name;
     private String gender;
-    private int mob_no; 
+    private long mob_no; 
     private String password;
     
 }
